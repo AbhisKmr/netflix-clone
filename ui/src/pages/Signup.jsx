@@ -3,10 +3,15 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import BackgroundImage from "../components/BankgroundImage";
 import Header from "../components/Header";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { firebaseAuth } from "../utils/firebase-config";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
+  const navigate = useNavigate();
   const [formValue, setFormValue] = useState({
     email: "",
     password: "",
@@ -16,10 +21,19 @@ export default function Signup() {
     try {
       const { email, password } = formValue;
       await createUserWithEmailAndPassword(firebaseAuth, email, password);
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.error("Login failed:", errorCode, errorMessage);
+      alert("Login failed: " + errorCode);
     }
   };
+
+  onAuthStateChanged(firebaseAuth, (currentUser) => {
+    if (currentUser) {
+      navigate("/");
+    }
+  });
 
   return (
     <Container>
@@ -93,7 +107,7 @@ const Container = styled.div`
     }
     .form {
       display: grid;
-      width: 60%;
+      width: 30%;
       input {
         color: black;
         padding: 1.5rem;
@@ -105,7 +119,8 @@ const Container = styled.div`
       }
     }
     button {
-      padding: 0.5rem 1rem;
+      width: 30%;
+      padding: 1.5rem 1rem;
       background-color: #e50914;
       border: none;
       corsor: pointer;
