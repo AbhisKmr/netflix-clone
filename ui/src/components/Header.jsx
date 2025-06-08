@@ -10,9 +10,9 @@ export default function Header(props) {
       <div className="logo">
         <img src={logo} alt="logo" />
       </div>
-      <button onClick={() => navigate(props.login ? "/login" : "/signup")}>
-        {props.login ? "Log in" : "Sign in"}
-      </button>
+      <text onClick={() => navigate(props.login ? "/login" : "/signup")}>
+        {props.login ? "Already have an account" : "Create account"}
+      </text>
     </Container>
   );
 }
@@ -24,12 +24,11 @@ const Container = styled.div`
       height: 5rem;
     }
   }
-  button {
+  text {
     padding: 0.5rem 1rem;
-    background-color: #e50914;
     border: none;
-    corsor: pointer;
-    color: white;
+    cursor: pointer;
+    color: #white;
     border-radius: 0.2rem;
     font-weight: bolder;
     font-size: 1.05rem;

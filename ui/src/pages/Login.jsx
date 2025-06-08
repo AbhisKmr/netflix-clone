@@ -71,7 +71,7 @@ export default function Login() {
               }
             />
           </div>
-          <button onClick={handleLogin}>Login In</button>
+          <button onClick={handleLogin}>Sign In</button>
         </div>
       </div>
     </Container>
@@ -118,7 +118,7 @@ const Container = styled.div`
       padding: 1.5rem 1rem;
       background-color: #e50914;
       border: none;
-      corsor: pointer;
+      cursor: pointer;
       color: white;
       border-radius: 0.2rem;
       font-weight: bolder;

@@ -123,7 +123,7 @@ const Container = styled.div`
       padding: 1.5rem 1rem;
       background-color: #e50914;
       border: none;
-      corsor: pointer;
+      cursor: pointer;
       color: white;
       border-radius: 0.2rem;
       font-weight: bolder;
