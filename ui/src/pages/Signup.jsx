@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
+
 import styled from "styled-components";
 import BackgroundImage from "../components/BankgroundImage";
 import Header from "../components/Header";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { firebaseAuth } from "../utils/firebase-config";
 
 export default function Signup() {
+  const [formValue, setFormValue] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleSignin = async () => {
+    try {
+      const { email, password } = formValue;
+      await createUserWithEmailAndPassword(firebaseAuth, email, password);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <Container>
       <BackgroundImage />
@@ -11,7 +28,7 @@ export default function Signup() {
         <Header login />
         <div className="body flex column a-center j-center">
           <div className="text flex column">
-            <h1>Unlimited movies, TV Show and more</h1>
+            <h1>Unlimited movies,TV Show and more</h1>
             <h4>Watch anywhere. Cancel anytime.</h4>
             <h6>
               Ready to watch? Enter you email to create or restart your
@@ -19,11 +36,33 @@ export default function Signup() {
             </h6>
           </div>
           <div className="form">
-            <input type="email" placeholder="Email Address" name="email" />
-            <input type="password" placeholder="Password" name="password" />
-            <button>Get Started</button>
+            <input
+              type="email"
+              placeholder="Email Address"
+              name="email"
+              value={formValue.email}
+              onChange={(e) =>
+                setFormValue({
+                  ...formValue,
+                  [e.target.name]: e.target.value,
+                })
+              }
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={formValue.password}
+              onChange={(e) =>
+                setFormValue({
+                  ...formValue,
+                  [e.target.name]: e.target.value,
+                })
+              }
+            />
+            {/* <button>Get Started</button> */}
           </div>
-          <button>Login</button>
+          <button onClick={handleSignin}>Sign Up</button>
         </div>
       </div>
     </Container>
@@ -41,5 +80,39 @@ const Container = styled.div`
     width: 100%;
     display: grid;
     grid-template-rows: 15vh 85vh;
+  }
+  .body {
+    gap: 1rem;
+    .text {
+      gap: 1rem;
+      text-align: center;
+      font-size: 2rem;
+      h1 : {
+        padding: 0 25rem;
+      }
+    }
+    .form {
+      display: grid;
+      width: 60%;
+      input {
+        color: black;
+        padding: 1.5rem;
+        font-size: 1.2rem;
+        border: 1px solid black;
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+    button {
+      padding: 0.5rem 1rem;
+      background-color: #e50914;
+      border: none;
+      corsor: pointer;
+      color: white;
+      border-radius: 0.2rem;
+      font-weight: bolder;
+      font-size: 1.05rem;
+    }
   }
 `;
