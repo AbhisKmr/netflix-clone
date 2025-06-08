@@ -39,11 +39,8 @@ export default function Login() {
         <div className="body flex column a-center j-center">
           <div className="text flex column">
             <h1>Unlimited movies,TV Show and more</h1>
-            <h4>Watch anywhere. Cancel anytime.</h4>
-            <h6>
-              Ready to watch? Enter you email to create or restart your
-              membership
-            </h6>
+            <h4>Premium Subscribers.</h4>
+            <h6>Ready to watch? Enter you email and password to sign in</h6>
           </div>
           <div className="form">
             <input
